@@ -15,7 +15,25 @@ function register_wakeup_time()
 
     xhttp.open("GET", "/register_wakeup_time?origins=" + latlng0[0] + "," + latlng0[1] + "&destinations=" + latlng1[0] + "," + latlng1[1] + "&time=" + $("#time_wakeup")[0].value, true);
     xhttp.send();
+}
 
+function getCoordinates() {
+    var start;
+    var finish;
+    if (latlng0[0] && latlng0[1]) {
+        start = latlng0[0] + "," + latlng0[1];
+    } else {
+        return null
+    }
+    if (latlng1[0] && latlng0[1]) {
+        finish = latlng1[0] + "," + latlng1[1];
+    } else {
+        return null
+    }
+    return {
+        start: start,
+        finish: finish
+    }
 }
 
 function displayRoute(LatLng0, LatLng1, map) {

@@ -29,12 +29,35 @@
                 input.clockpicker('show')
                         .clockpicker('toggleView', 'minutes');
             });
+
+            $("#submit-time-btn").click(function(){
+                var coords = getCoordinates();
+                if (coords){
+                    $.ajax({
+                        type: "POST",
+                        data : {
+                            wakeupTime:2,
+                            breakfastTime:3,
+                            coords: coords,
+                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                        },
+                        success: function(data, textStatus, jqXHR)
+                        {
+                            //data - response from server
+                        },
+                        error: function (jqXHR, textStatus, errorThrown)
+                        {
+
+                        }
+                    });
+                }
+            });
         });
     </script>
 {% endblock %}
 
 {% block content %}
-
+{% csrf_token %}
 <div class="container" id="main">
   <div class="row">
       <h1> Map!</h1>
@@ -42,36 +65,37 @@
   </div>
   <div class="row">
     <div class="col-sm-4" id="left">
-        <div class="page-header">
-            <h3> Pick you wakeup time</h3>
-        </div>
+            <div class="page-header">
+                <h3> Pick you wakeup time</h3>
+            </div>
 
-        <div class="input-group clockpicker pull-center" data-placement="right" data-align="top" data-autoclose="true">
-            <input type="text" class="form-control" value="08:00">
-            <span class="input-group-addon">
-                <span class="glyphicon glyphicon-time"></span>
-            </span>
-        </div>
+            <div class="input-group clockpicker pull-center" data-placement="right" data-align="top" data-autoclose="true">
+                <input type="text" class="form-control" value="08:00">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+            </div>
 
-        <div class="page-header">
-            <h3> How much time do you need for breakfast?</h3>
-        </div>
-        <div class="input-group pull-center" data-placement="right" id="breakfast-time" data-align="top" data-autoclose="true">
-            <input type="text" class="form-control" value="00:10">
-            <span class="input-group-addon">
-                <span class="glyphicon glyphicon-time"></span>
-            </span>
-        </div>
-        <br>
-        <br>
-        <div class="text-center">
-            <button id="singlebutton" class="btn btn-lg btn-primary" onclick="register_wakeup_time()">Submit</button>
-        </div>
+            <div class="page-header">
+                <h3> How much time do you need for breakfast?</h3>
+            </div>
+            <div class="input-group pull-center" data-placement="right" id="breakfast-time" data-align="top" data-autoclose="true">
+                <input type="text" class="form-control" value="00:10">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+            </div>
+            <br>
+            <br>
+            <div class="text-center">
+                <button id="submit-time-btn" class="btn btn-lg btn-primary">Submit</button>
+            </div>
+
     </div>
     <div class="col-sm-8">
                 <div id="map_canvas" class="line"></div>
     </div>
   </div>
 </div>
-{% endblock %}
 
+{% endblock %}
