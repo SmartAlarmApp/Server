@@ -1,0 +1,24 @@
+h1
+{
+    font-size: 16px;
+}
+ 
+#map_canvas
+{
+    width: 80%;
+    height: 80%;
+    margin: 10px auto;
+}
+ 
+div#latlng-control
+{
+    background: #ffc;
+    border: 1px solid #676767;
+    padding: 2px 4px;
+    position: absolute;
+}
+ 
+.line
+{
+    padding: 3px;
+}
