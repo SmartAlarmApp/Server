@@ -1,0 +1,16 @@
+.input-group {
+    width: 110px;
+    margin-bottom: 10px;
+}
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+.pull-center {
+	margin-left: auto;
+	margin-right: auto;
+}
+#center-btn {
+    text-align: center;
+}
