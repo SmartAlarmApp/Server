@@ -32,23 +32,17 @@
 
             $("#submit-time-btn").click(function(){
                 var coords = getCoordinates();
+                var wakeUpTime = $("#wakeUpTime").val();
+                var brTime = $("#breakfastTime").val();
                 if (coords){
-                    $.ajax({
-                        type: "POST",
-                        data : {
-                            wakeupTime:2,
-                            breakfastTime:3,
-                            coords: coords,
-                            csrfmiddlewaretoken: '{{ csrf_token }}'
-                        },
-                        success: function(data, textStatus, jqXHR)
-                        {
-                            //data - response from server
-                        },
-                        error: function (jqXHR, textStatus, errorThrown)
-                        {
-
-                        }
+                    var objects = JSON.stringify({
+                        wakeUpTime:wakeUpTime,
+                        breakfastTime:brTime,
+                        coords: coords
+                    });
+                    $.post('/api/register_wakeup_time', objects,
+                        function(returnedData){
+                             console.log(returnedData);
                     });
                 }
             });
@@ -66,11 +60,11 @@
   <div class="row">
     <div class="col-sm-4" id="left">
             <div class="page-header">
-                <h3> Pick you wakeup time</h3>
+                <h3> Pick your wake up time</h3>
             </div>
 
             <div class="input-group clockpicker pull-center" data-placement="right" data-align="top" data-autoclose="true">
-                <input type="text" class="form-control" value="08:00">
+                <input type="text" class="form-control" id="wakeUpTime" value="08:00">
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-time"></span>
                 </span>
@@ -80,7 +74,7 @@
                 <h3> How much time do you need for breakfast?</h3>
             </div>
             <div class="input-group pull-center" data-placement="right" id="breakfast-time" data-align="top" data-autoclose="true">
-                <input type="text" class="form-control" value="00:10">
+                <input type="text" class="form-control" id="breakfastTime" value="00:10">
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-time"></span>
                 </span>

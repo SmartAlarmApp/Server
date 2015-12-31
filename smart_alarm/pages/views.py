@@ -8,6 +8,4 @@ def index(request):
 
 
 def map(request):
-    if request.method == 'POST':
-        pass
     return render(request, 'map.html')

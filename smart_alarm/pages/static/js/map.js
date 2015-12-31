@@ -30,10 +30,7 @@ function getCoordinates() {
     } else {
         return null
     }
-    return {
-        start: start,
-        finish: finish
-    }
+    return [start,finish];
 }
 
 function displayRoute(LatLng0, LatLng1, map) {
@@ -73,7 +70,7 @@ $(document).ready(function () {
         zoom: 12
     });
 
-    console.log(map.map);
+    //console.log(map.map);
  
     map.onclickGetLatLng($("#latlng"), function(latlng)
         {
@@ -96,14 +93,14 @@ $(document).ready(function () {
 
             displayRoute( latlng0, latlng1, map.map );
 
-            var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                if (xhttp.readyState == 4 && xhttp.status == 200) {
-                    console.log( xhttp.responseText );
-                }
-            };
-            xhttp.open("GET", "get_routing_info?origins=" + latlng0[0] + "," + latlng0[1] + "&destinations=" + latlng1[0] + "," + latlng1[1], true);
-            xhttp.send();
+            //var xhttp = new XMLHttpRequest();
+            //    xhttp.onreadystatechange = function() {
+            //    if (xhttp.readyState == 4 && xhttp.status == 200) {
+            //        console.log( xhttp.responseText );
+            //    }
+            //};
+            //xhttp.open("GET", "get_routing_info?origins=" + latlng0[0] + "," + latlng0[1] + "&destinations=" + latlng1[0] + "," + latlng1[1], true);
+            //xhttp.send();
 
 
         },
